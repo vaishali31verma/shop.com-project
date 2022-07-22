@@ -11,7 +11,7 @@ import {
     DrawerContent,
     DrawerCloseButton,
   } from '@chakra-ui/react'
-import { css } from "@emotion/core"
+// import { css } from "@emotion/core"
 const Cart = () => {
     const [size, setSize] = React.useState('')
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -59,11 +59,7 @@ const Cart = () => {
 
 
 
-        <Text css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Cart</Text>
+        <Text>Cart</Text>
     </Flex>
   )
 }

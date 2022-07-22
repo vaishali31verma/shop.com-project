@@ -5,6 +5,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.4",
     "@chakra-ui/react": "^2.2.4",
+    "@emotion/core": "^10.1.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@testing-library/jest-dom": "^5.16.4",
@@ -12,10 +13,19 @@
     "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^6.5.1",
     "react": "^18.2.0",
+    "react-card-slider-component": "^1.0.9",
+    "react-carousel-minimal": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-id-swiper": "^4.0.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-simple-image-slider": "^2.4.1",
+    "react-slick": "^0.29.0",
+    "react-slideshow-image": "^4.0.3",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^6.8.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
