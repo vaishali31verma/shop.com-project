@@ -19,6 +19,7 @@ const Contextapiprovider = ({children}) => {
   const [isAuth,setisAuth] = useState(false)
   const [cosmetics,setcosmetics] = useState([])
      const [cosmeticsdata,setcosmeticsdata] = useState([])
+     const [userid,setuserid] = useState("")
   // const [detailoofcos,setdetailofcos] =useState([])
    
   useEffect(()=>{
@@ -26,44 +27,34 @@ const Contextapiprovider = ({children}) => {
      setmedicine(res.data)
       
     })
-  })
+  },[])
   useEffect(()=>{
     axios.get(`https://myownapitodo.herokuapp.com/jewelary`).then((res)=>{
         setjewelary(res.data)
     })
-  })
+  },[])
   useEffect(()=>{
     axios.get(`https://myownapitodo.herokuapp.com/clothing`).then((res)=>{
       setclothing(res.data)
     })
-  })
+  },[])
   useEffect(()=>{
     axios.get(`https://myownapitodo.herokuapp.com/Cosmetics`).then((res)=>{
       setcosmetics(res.data)
     })
-  })
+  },[])
   useEffect(()=>{
     axios.get(`https://myownapitodo.herokuapp.com/tableware`).then((res)=>{
       settableware(res.data)
     })
-  })
+  },[])
   
  
- 
- 
-
-
-
-
-
-
-
-
 
   const Adduser =(data)=>{
     usergetapi().then((res)=>{
       let update = res.data.filter((e)=>{
-        return (e.email==data.email)
+        return (e.email===data.email)
       })
       if(update.length>0){
        
@@ -71,6 +62,7 @@ const Contextapiprovider = ({children}) => {
       }
       else{
         userpostapi(data)    
+        
       }
   })
 
@@ -83,8 +75,17 @@ const Contextapiprovider = ({children}) => {
 
           if(logged.length>0){
             setisAuth(true)
+            usergetapi().then((res)=>{
+              res.data.map((r)=>{
+                if(user.email===r.email){
+                   setuserid(r.id)
+                  
+                   return userid
+                }
+              })
+            })
             alert(`YOU are Logged IN`)
-           
+             
           }
           else{
               alert(`user doesn't exist`)
@@ -94,7 +95,7 @@ const Contextapiprovider = ({children}) => {
 
   return (
     <div>
-      <AppContext.Provider value ={{isAuth,tableware,medicine,Adduser,Checkuser,jewelary,Clothes,cosmetics}} > 
+      <AppContext.Provider value ={{userid,isAuth,tableware,medicine,Adduser,Checkuser,jewelary,Clothes,cosmetics}} > 
         {children}
       </AppContext.Provider>
     </div>

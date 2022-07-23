@@ -22,7 +22,7 @@ const Navbartwo = () => {
   const [placement, setPlacement] = React.useState('left')
 
   return (
-  <Box >
+  <Box zIndex={"99"} position={"static"}>
    <Flex justifyContent={"space-between"} marginTop={"20px"}>
    <Button colorScheme='blue' onClick={onOpen} bg="white" >
     <HamburgerIcon color={"black"}/>

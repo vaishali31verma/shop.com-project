@@ -11,7 +11,7 @@ const userpostapi=(data)=>{
         axios({
             url:`https://myownapitodo.herokuapp.com/User`,
             method:"POST",
-            data:data
+            data:{...data,cart:[]}
         })
     )
 }

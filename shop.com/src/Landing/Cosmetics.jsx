@@ -5,7 +5,7 @@ import { AppContext } from '../context/contextapi'
 import Slider from "react-slick";
 import Nexttocosmatics from './Nexttocosmatics';
 import {useNavigate} from "react-router-dom"
-
+import {TiDelete} from "react-icons/ti"
 
 const Cosmetics = () => {
     const {cosmetics} = useContext(AppContext)
@@ -66,9 +66,9 @@ const Cosmetics = () => {
     <Slider {...settings}>
     {cosmetics.map((item)=>(
         <Box >
-        <Box boxShadow='2xl' w="300px" h={"440px"} onClick={()=>handledeteilofcos(item.id)}>
+        <Box boxShadow='2xl' w="300px" h={"440px"} >
             <Flex flexDirection={"column"} alignItems="center">
-            <Image src={item.image[0]} w={"270px"} h="270px"/>
+            <Image src={item.image[0]} w={"270px"} h="270px" onClick={()=>handledeteilofcos(item.id)}/>
             <Flex flexDirection={"column"} alignItems={"start"} marginLeft="12px">
             <Text fontSize={"17px"}>{item.name}</Text>
             <Text>$ {item.price}</Text>
@@ -76,7 +76,8 @@ const Cosmetics = () => {
                         <Text fontSize={"15px"} fontWeight={"bold"}>2%</Text>
                         <Image src="https://img.shop.com/Image/resources/images/cashback-icon.svg" w={"20px"} />
                         <Text fontSize={"15px"} fontWeight={"bold"}>Cashback</Text>
-                    </Flex>
+            </Flex>
+            <TiDelete />
              <Text>rating:{item.ratingValue}</Text> 
              <Text color={"teal"} fontSize={"12px"}>Free shipping with $99 orders</Text>
             </Flex>
