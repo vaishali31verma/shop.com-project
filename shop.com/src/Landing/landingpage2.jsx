@@ -1,8 +1,9 @@
 import React from 'react'
 import {Box, Flex,Text,Image, Button} from "@chakra-ui/react"
+import Landingpage3 from './Landingpage3'
 const Landingpage2 = () => {
   return (
-    <Box border={"2px solid black"}>
+    <Box >
        <Flex>
          <Box margin={"20px"} boxShadow='dark-lg'>
             <Text display={"block"} textAlign={"left"} >Recently Viewed</Text>
@@ -42,6 +43,7 @@ const Landingpage2 = () => {
 
 
        </Flex>
+       <Landingpage3/>
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import { Box, Button, Flex, useDisclosure,Text } from '@chakra-ui/react'
 import React from 'react'
 import Signin from './Signin'
-import { css } from "@emotion/core"
+
 import {
   
   Drawer,
@@ -17,12 +17,13 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import Catefories from './Catefories'
 import Orders from './Orders'
 import Cart from './Cart'
+import { useNavigate } from 'react-router-dom'
 const Navbartwo = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [placement, setPlacement] = React.useState('left')
-
+  const navigate = useNavigate()
   return (
-  <Box >
+  <Box zIndex={"99"} position={"static"}>
    <Flex justifyContent={"space-between"} marginTop={"20px"}>
    <Button colorScheme='blue' onClick={onOpen} bg="white" >
     <HamburgerIcon color={"black"}/>
@@ -36,61 +37,17 @@ const Navbartwo = () => {
     SHOP.COM</DrawerHeader> 
           <DrawerBody scrollBehavior={"smooth"} >
             <Box >
-            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Clothes</Box>
-            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Gift Center</Box>
-            <Box boxShadow='2xl' p='6' rounded='md' bg='white' h={"2px"}css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>SHOP.COM Home Warranties</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Onecart Exclusive Deals</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Shoes</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Beauty</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Home</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Health & Nutrition</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Kids</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Pet Supplies</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} css={css`
-     &:hover {
-        color: blue;
-      }
-  `}>Food & Drink</Box>
+            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Clothes</Box>
+            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Gift Center</Box>
+            <Box boxShadow='2xl' p='6' rounded='md' bg='white' h={"2px"}>SHOP.COM Home Warranties</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Onecart Exclusive Deals</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Shoes</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} onClick={()=>navigate("/allcosmetics")}>Beauty</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Home</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Health & Nutrition</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Kids</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Pet Supplies</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Food & Drink</Box>
            </Box>
           </DrawerBody>
         </DrawerContent>

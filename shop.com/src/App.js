@@ -1,5 +1,6 @@
 
 import './App.css';
+import Footer from './Footer/footer';
 import Navbar from './Navbar/navbar';
 import Routerss from './Routerss';
 
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
    <Navbar/>
    <Routerss/>
+   <Footer/>
     </div>
   );
 }
