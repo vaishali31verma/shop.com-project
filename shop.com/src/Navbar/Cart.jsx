@@ -19,6 +19,15 @@ import {
     DrawerContent,
     DrawerCloseButton,
   } from '@chakra-ui/react'
+  import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from '@chakra-ui/react'
 import Subtotal from './Subtotal'
 import { useEffect } from 'react'
 import { AppContext } from '../context/contextapi'
@@ -35,18 +44,37 @@ const Cart = () => {
     setSize(newSize)
     onOpen()
   }
-   useEffect(()=>{
-    axios.get(`https://myownapitodo.herokuapp.com/User/${userid}`).then((res)=>{
-      setcart(res.data.cart)
-    })
-   },[])
-
-
-  console.log(cartdata)
-  const handledelete =(id,name)=>{
-   
+  
+  const handlecart =async()=>{   
+      const cart= await axios.get(`https://myownapitodo.herokuapp.com/User/${userid}`)
+      let prevcart= cart.data.cart
+      setcart(prevcart)   
+      
   }
- 
+  
+  
+  
+  const handledelete =async(id,name)=>{
+
+    const getfordel= await axios.get(`https://myownapitodo.herokuapp.com/User/${userid}`)
+    let  userdata = getfordel.data
+    
+  const data=  cartdata.filter((e)=>{
+      return e.id!==id && e.name!==name
+     })
+     
+     axios({
+      url:`https://myownapitodo.herokuapp.com/User/${userid}`,
+      method:"PATCH",
+      data: {...userdata,cart: [...data] }
+  })
+
+  handlecart()
+  setTimeout(() => {
+    handlecart()
+  }, 0);
+  }
+  
   const sizes = ['md']
   return (
     <Flex marginRight={"20px"}>
@@ -54,14 +82,18 @@ const Cart = () => {
 
         {sizes.map((size) => (
         <Button
-          onClick={() => handleClick(size)}
+          onClick={() => {
+            handlecart()
+            handleClick(size)
+          
+          }}
           key={size}
           m={1}
           size={"20px"}
         >{<MdShoppingCart  size={"30px"}/>}</Button>
       ))}
 
-      <Drawer onClose={onClose} isOpen={isOpen} size={size}>
+      <Drawer onClose={onClose} isOpen={isOpen} size={size} >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -81,7 +113,7 @@ const Cart = () => {
                     </Slider>
                     {/* <Text>Add $ {} for free shipping</Text> */}
                      <Box>
-      {cartdata.length>0&& <Box  overflow={"scroll"}   w="500px" h="400px" bg="white"
+      {cartdata && <Box  overflow={"scroll"}   w="500px" h="400px" bg="white"
        sx={
     { 
      '::-webkit-scrollbar':{
@@ -104,16 +136,12 @@ const Cart = () => {
              ))}
              </Flex>
           <Text fontSize={"25px"}>₹ {e.price}</Text>   
-          <Text fontSize={"20px"}>Quantity:{e.q}</Text>
-        <Text> Total of {e.category} is :{e.price*e.q}</Text>
+          <Text fontSize={"20px"}>Quantity:{e.qty}</Text>
+        <Text> Total of {e.category} is :{e.price*e.qty}</Text>
          </Box>
          <Flex flexDirection={"column"}>
          <Text>Qty</Text>
-         <Select defaultValue={e.qty} w="30px" placeholder='1'>
-           {qtyArray.map((i)=>(
-             <option value={i} >{i}</option>
-           ))}
-          </Select>
+       
           </Flex>
 
        <Image src={e.image[0]} w="300px" h="150px" maxHeight={"fit-content"} maxWidth="fit-content"/>
@@ -123,8 +151,10 @@ const Cart = () => {
          </Box>
       ))}
       
+     <Box>
       <Subtotal />
-      
+
+     </Box>
       </Box>}
 
      </Box>
@@ -142,7 +172,7 @@ const Cart = () => {
 
          <Text>Cart</Text>
     </Flex>
-  
+
   )
 }
 

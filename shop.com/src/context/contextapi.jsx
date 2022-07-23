@@ -20,6 +20,10 @@ const Contextapiprovider = ({children}) => {
   const [cosmetics,setcosmetics] = useState([])
      const [cosmeticsdata,setcosmeticsdata] = useState([])
      const [userid,setuserid] = useState("")
+     const [username,setusername] = useState("")
+     const [sort,setsort] = useState("asc")
+     const [page,setpage] = useState(1)
+     const [fieldof,setfieldof] = useState("")
   // const [detailoofcos,setdetailofcos] =useState([])
    
   useEffect(()=>{
@@ -38,17 +42,54 @@ const Contextapiprovider = ({children}) => {
       setclothing(res.data)
     })
   },[])
-  useEffect(()=>{
-    axios.get(`https://myownapitodo.herokuapp.com/Cosmetics`).then((res)=>{
-      setcosmetics(res.data)
-    })
-  },[])
+  
   useEffect(()=>{
     axios.get(`https://myownapitodo.herokuapp.com/tableware`).then((res)=>{
       settableware(res.data)
     })
   },[])
+  useEffect(()=>{
+    axios.get(`https://myownapitodo.herokuapp.com/Cosmetics`).then((res)=>{
+      setcosmetics(res.data)
+    })
+  },[])
   
+  const handlecosmetics =(s,p,y)=>{
+    console.log(y)
+    axios({
+      url:`https://myownapitodo.herokuapp.com/Cosmetics/`,
+      method:"GET",
+      params:{
+        _order:s,
+        _page:p,
+        _limit:8,
+        _sort:y
+      }
+    } 
+    ).then((res)=>{
+      setcosmeticsdata(res.data)
+    })
+  }
+
+
+  useEffect(()=>{
+    handlecosmetics(sort,page,fieldof)
+  },[sort,page,fieldof])
+
+  const handlesort =(x,y)=>{
+   
+    setsort(x)
+    setfieldof(y)
+    
+  }
+  const handlepage =(p)=>{
+       setpage(p)
+       
+  }
+  const handlesortbyrating =(m,k)=>{
+    setfieldof(k)
+    setsort(m)
+  }
  
 
   const Adduser =(data)=>{
@@ -79,7 +120,7 @@ const Contextapiprovider = ({children}) => {
               res.data.map((r)=>{
                 if(user.email===r.email){
                    setuserid(r.id)
-                  
+                   setusername(r.name)
                    return userid
                 }
               })
@@ -95,7 +136,7 @@ const Contextapiprovider = ({children}) => {
 
   return (
     <div>
-      <AppContext.Provider value ={{userid,isAuth,tableware,medicine,Adduser,Checkuser,jewelary,Clothes,cosmetics}} > 
+      <AppContext.Provider value ={{handlesortbyrating,page,handlepage,handlesort,cosmeticsdata,username,userid,isAuth,tableware,medicine,Adduser,Checkuser,jewelary,Clothes,cosmetics}} > 
         {children}
       </AppContext.Provider>
     </div>

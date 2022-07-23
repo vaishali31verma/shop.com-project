@@ -17,10 +17,11 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import Catefories from './Catefories'
 import Orders from './Orders'
 import Cart from './Cart'
+import { useNavigate } from 'react-router-dom'
 const Navbartwo = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [placement, setPlacement] = React.useState('left')
-
+  const navigate = useNavigate()
   return (
   <Box zIndex={"99"} position={"static"}>
    <Flex justifyContent={"space-between"} marginTop={"20px"}>
@@ -41,7 +42,7 @@ const Navbartwo = () => {
             <Box boxShadow='2xl' p='6' rounded='md' bg='white' h={"2px"}>SHOP.COM Home Warranties</Box>
            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Onecart Exclusive Deals</Box>
            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Shoes</Box>
-           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Beauty</Box>
+           <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} onClick={()=>navigate("/allcosmetics")}>Beauty</Box>
            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Home</Box>
            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Health & Nutrition</Box>
            <Box boxShadow='2xl' p='6' rounded='md' bg='white'h={"2px"} >Kids</Box>

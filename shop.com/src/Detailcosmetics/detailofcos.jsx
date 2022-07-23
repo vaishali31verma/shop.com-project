@@ -30,32 +30,38 @@ const Detailofcos = () => {
         })
     }
     const handlecart =async(cosdata)=>{
-       let updatedCart = []
-     let prevdata =await axios.get(`https://myownapitodo.herokuapp.com/User/${userid}`)
-     let prevcart= prevdata.data.cart
+        if(userid===""){
+            alert(`please login first`)
+        }
+        else{
+            let updatedCart = []
+            let prevdata =await axios.get(`https://myownapitodo.herokuapp.com/User/${userid}`)
+            let prevcart= prevdata.data.cart
+            
+                     
+                        
+                      if(prevcart.length > 0){
+                        prevcart.map((cartItem)=>{
+                           if(cosdata.id!==cartItem.id){
+                               updatedCart.push(cartItem)
+                           }
+                           
+                      })   
+                      }
+                    
+           //    })
+           //    console.log("updatedcart before"+updatedCart)
+              cosdata.qty=qty;
+               updatedCart.push(cosdata)
+               // console.log("updatedcart after adding cosdata"+updatedCart)
+                           axios({
+                               url:`https://myownapitodo.herokuapp.com/User/${userid}`,
+                               method:"PATCH",
+                               data: {cart: [...updatedCart] }
+                           })
+                       alert(`product added successfully`)            
+        }
      
-               console.log(prevcart)
-                 
-               if(prevcart.length > 0){
-                 prevcart.map((cartItem)=>{
-                    if(cosdata.id!==cartItem.id){
-                        updatedCart.push(cartItem)
-                    }
-                    
-               })   
-               }
-               console.log(prevcart)
-    //    })
-       console.log("updatedcart before"+updatedCart)
-       cosdata.qty=qty;
-        updatedCart.push(cosdata)
-        console.log("updatedcart after adding cosdata"+updatedCart)
-                    axios({
-                        url:`https://myownapitodo.herokuapp.com/User/${userid}`,
-                        method:"PATCH",
-                        data: {cart: [...updatedCart] }
-                    })
-                    
       
     }
     
@@ -82,7 +88,7 @@ const Detailofcos = () => {
             <Text color="teal" fontSize={"40px"}> ₹ {cosdata.price}</Text>
             <Flex justifyContent={"center"}>
             {starArray.map((i)=>(
-                <StarIcon color={i<cosdata.ratingValue?"orange" : "lightgrey"}/>
+                <StarIcon color={i<=Math.abs(cosdata.ratingValue)?"orange" : "lightgrey"}/>
             ))}
             </Flex>
             <Text fontSize={"30px"}>Reviews count :{cosdata.reviewCount}</Text>

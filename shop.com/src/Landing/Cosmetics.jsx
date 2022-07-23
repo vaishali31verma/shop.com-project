@@ -58,7 +58,10 @@ const Cosmetics = () => {
   return (
     
     <Box marginTop={"100px"}>
-        <Text fontSize={"40px"} marginTop={"30px"} marginRight={"780px"}>Hot Summer Beauty Products</Text>
+      <Flex justifyContent={"space-between"} >
+        <Text fontSize={"40px"} marginTop={"30px"} >Hot Summer Beauty Products</Text>
+        <Text onClick={()=>navigate("/allcosmetics")} fontSize={"24px"} color={"teal"}>See All...</Text>
+        </Flex>
     <Flex >
     <Image src="https://img.shop.com/Image/homepage/SHOP_USA_100162_ENG_Summer_Beauty_Banners_bgsq1655839103149.jpg" w="400px" h="440px"/>
     

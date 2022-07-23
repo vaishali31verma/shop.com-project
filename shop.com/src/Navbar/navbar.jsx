@@ -15,7 +15,7 @@ const Navbar = () => {
   const [data,setdata] = useState([])
   const [loading,setloading] = useState(false)
   const [error,seterror] = useState(false)
-  
+  const navigate = useNavigate()
   useEffect(()=>{
     if(debouncesearch){
       fetchapiofcos(debouncesearch)
@@ -36,7 +36,9 @@ const Navbar = () => {
     setsearchtext("")
   }
   const starArray = [...Array(5).keys()].map(i => i + 1)
-
+  const handledeteilofcos =(id)=>{
+    navigate(`/${id}`)
+  }
   return (
     
     
@@ -74,9 +76,9 @@ const Navbar = () => {
   }>
       
       {data.map((e)=>(
-      <Box>
-        <Flex justifyContent={"space-between"} border={"1px solid black"}>
-        <Box  w="300px">
+      <Box >
+        <Flex justifyContent={"space-between"} border={"1px solid black"} >
+        <Box  w="300px" onClick={()=>handledeteilofcos(e.id)}>
        
         <Text fontSize={"18px"} fontWeight="500" color="grey">{e.name}</Text>
         <Text fontSize={"18px"} fontWeight="500">{e.category}</Text>

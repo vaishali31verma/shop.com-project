@@ -27,6 +27,8 @@ const Account = () => {
   }
   const handleSubmit =()=>{
     Adduser(formdata)
+    alert(`User is created`)
+    
   }
 
   return (

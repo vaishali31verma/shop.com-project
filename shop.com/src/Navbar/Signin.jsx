@@ -1,5 +1,5 @@
 import { Box, Button, Flex ,Input,Text, useDisclosure} from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import {FaUserCircle,FaUserAlt} from "react-icons/fa"
 import {TbBus} from "react-icons/tb"
 import {RiMoneyDollarCircleFill} from "react-icons/ri"
@@ -14,12 +14,13 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
+import { AppContext } from '../context/contextapi'
 
 const Signin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
   const navigation = useNavigate();
-
+  const {username} = useContext(AppContext)
 
   return (
     <Box>
@@ -54,7 +55,7 @@ const Signin = () => {
         </DrawerContent>
       </Drawer>
 
-       <Text fontSize={"20px"}>Signin</Text>
+       {username?<Text>{username}</Text>:<Text>SignIn</Text>}
         </Flex>
     </Box>
   )
