@@ -18,5 +18,5 @@ Every user has its own cart
 ![Screenshot (111)](https://user-images.githubusercontent.com/84222464/180634285-246b5efe-fea7-4864-a41f-9676a5f55cc0.png)
 *This website is based on react and Chakra UI
 
-HERE IS LINK OF WEBSITE
-https://shopprojectrct-vaishali31verma.vercel.app/
+
+
